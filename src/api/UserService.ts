@@ -10,20 +10,13 @@ export class UserService {
     });
 
     async createUser(username: string, email: string): Promise<any> {
-        try {
-            const response = await this.api.post(`/user`, {
-                name: username,
-                email: email,
-                watch_list: []
-            });
-            if (response.status != 200) {
-                return null;
-            } else {
-                return response.data;
-            }
-        } catch (error) {
-            return null;
-        }
+        const response = await this.api.post(`/user`, {
+            name: username,
+            email: email,
+            watch_list: []
+        });
+
+        return response.data;
     }
 
     async getUsers(): Promise<User[]> {

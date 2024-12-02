@@ -31,7 +31,7 @@ export default function Root() {
             }
         };
         fetchData().then();
-    }, [currentUser, userService]);
+    }, [currentUser]);
 
 
     const handleSelection = (selected: any) => {
@@ -55,8 +55,9 @@ export default function Root() {
 
     async function createUser() {
         try {
-            const response = await userService.createUser(formName, formEmail);
-            alert(`Added "${response}"`);
+            const createdUser: User = await userService.createUser(formName, formEmail);
+            alert(`Added "${JSON.stringify(createdUser)}"`);
+            setCurrentUser(createdUser);
         } catch (err: any) {
            if (err instanceof Error) {
                alert(`User creation failed due to: ${err.message}. Try Again.`)

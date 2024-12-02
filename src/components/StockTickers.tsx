@@ -10,7 +10,6 @@ export interface StockTickersProps {
 }
 
 
-
 export default function StockTickers(props: StockTickersProps) {
     const [watchList, setWatchList] = React.useState<string[]>([]);
     const [symbol, setSymbol] = React.useState<string>("");
@@ -27,6 +26,11 @@ export default function StockTickers(props: StockTickersProps) {
         };
         fetchData();
     }, [props.user, props.userService]);
+
+    // Cleanup
+    useEffect(() => {
+        setWatchList([]);
+    }, []);
 
     const {
         register,
